@@ -110,4 +110,41 @@ describe Blinkman::Configurable do
       @instance = nil
     end
   end
+
+  describe 'uses optional flag' do
+    before do
+      class OptionalConfigureClass
+        include Blinkman::Configurable
+        configure 'testkey', optional: true
+      end
+    end
+
+    context 'environment variable given' do
+      before do
+        ENV['TESTKEY'] = 'exists!'
+      end
+      it 'is not raise any error' do
+        expect { OptionalConfigureClass.new }.to_not raise_error
+      end
+
+      it 'has method to get configured value' do
+        expect(OptionalConfigureClass.new.testkey).to eq('exists!')
+      end
+
+      after do
+        ENV.delete('TESTKEY')
+      end
+    end
+
+    context 'environment variable not given' do
+      it 'do not rise any error' do
+        expect { OptionalConfigureClass.new }.to_not raise_error
+      end
+
+      it 'has method to get nil value' do
+        expect(OptionalConfigureClass.new.testkey).to eq(nil)
+      end
+
+    end
+  end
 end
