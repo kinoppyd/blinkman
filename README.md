@@ -1,8 +1,6 @@
 # Blinkman
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/blinkman`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Blinkman is DSL for [Blink(1)](https://blink1.thingm.com/)
 
 ## Installation
 
@@ -12,17 +10,44 @@ Add this line to your application's Gemfile:
 gem 'blinkman'
 ```
 
+Default Blinkman uses commandline interface. If you want to connect other services, add adapter plugin for your Gemfile.
+ex.
+
+```ruby
+gem 'blinkman-slack'
+```
+
 And then execute:
 
-    $ bundle
+    $ bundle install
 
-Or install it yourself as:
-
-    $ gem install blinkman
 
 ## Usage
 
-TODO: Write usage instructions here
+Write ruby script file like this:
+
+```ruby
+require 'blinkman'
+
+bot = Blinkman::Bot.new do
+  blink red 2.times, during(250), when_if { message.body == 'hello' }
+end
+
+bot.listen
+```
+
+and execute:
+
+    $ bundle exec ruby example.rb
+
+This example uses commandline adapter (default adapter). Type 'hello' in shell then blink blink(1) red twice.
+
+    $ > hello # blink red
+
+If you want to exit, type 'exit'
+
+    $ > exit
+
 
 ## Development
 
@@ -32,7 +57,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/blinkman. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/kinoppyd/blinkman. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
