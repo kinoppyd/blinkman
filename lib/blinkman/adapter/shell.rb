@@ -7,7 +7,7 @@ module Blinkman
 
       PROMPT = '> '
 
-      def initialize
+      def initialize(bot)
         @stopped = false
         super
       end
