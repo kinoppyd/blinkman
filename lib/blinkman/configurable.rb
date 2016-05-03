@@ -14,10 +14,14 @@ module Blinkman
         klass.send(:class_variable_set, :@@configured_keys, [])
 
         class << klass
-          def configure(key)
-            keys = send(:class_variable_get, :@@configured_keys)
-            keys << key
-            send(:class_variable_set, :@@configured_keys, keys)
+          def configure(key, opts = {})
+            opts = { optional: false }.merge(opts)
+
+            if ! opts[:optional]
+              keys = send(:class_variable_get, :@@configured_keys)
+              keys << key
+              send(:class_variable_set, :@@configured_keys, keys)
+            end
 
             define_method(key.downcase) do
               ENV[__method__.to_s.upcase]
