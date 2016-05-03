@@ -1,3 +1,5 @@
+require 'dotenv'
+
 module Blinkman
   class Bot
 
@@ -10,6 +12,7 @@ module Blinkman
     attr_reader :handlers
 
     def initialize(&block)
+      Dotenv.load
       ::Bundler.require(:default)
       @adapter = Adapter.adapter_classes.last.new(self)
       @handlers = []
