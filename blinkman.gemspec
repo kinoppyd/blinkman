@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Blinkman is the DSL for blink(1)}
   spec.description   = %q{Blinkman is the DSL for blink(1)}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/kinoppyd/blinkman"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
