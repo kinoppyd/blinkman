@@ -10,6 +10,7 @@ module Blinkman
     attr_reader :handlers
 
     def initialize(&block)
+      ::Bundler.require(:default)
       @adapter = Adapter.adapter_classes.last.new(self)
       @handlers = []
       instance_eval(&block) if block
