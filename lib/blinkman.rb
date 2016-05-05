@@ -2,6 +2,7 @@ require "blinkman/version"
 require 'blink1'
 
 module Blinkman
+  require 'blinkman/blink1'
   require 'blinkman/bot'
   require 'blinkman/event'
   require 'blinkman/action'

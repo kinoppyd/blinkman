@@ -3,18 +3,6 @@ require 'dotenv'
 module Blinkman
   class Bot
 
-    LED_COLORS = {
-      :red => {r: 255, g: 0, b: 0},
-      :green => {r: 0, g: 255, b: 0},
-      :blue => {r: 0, g: 0, b: 255},
-      :white => {r: 255, g: 255, b: 255},
-      :gray => {r: 128, g: 128, b: 128},
-      :purple => {r: 128, g: 0, b: 128},
-      :yellow => {r: 255, g: 255, b: 0},
-      :navy => {r: 0, g: 0, b: 128},
-      :aqua => {r: 0, g: 255, b: 255},
-    }
-
     attr_reader :handlers
 
     def initialize(&block)
@@ -41,9 +29,9 @@ module Blinkman
     end
 
     # add methods for each colors
-    LED_COLORS.each_pair do |color_name, color_code|
+    ::Blinkman::Blink1::LED_COLORS.each_pair do |color_name, color_code|
       define_method(color_name) do |times, during, event|
-        led(LED_COLORS[__method__.to_sym], times, during, event)
+        led(::Blinkman::Blink1::LED_COLORS[__method__.to_sym], times, during, event)
       end
     end
 
